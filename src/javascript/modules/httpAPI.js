@@ -5,7 +5,6 @@
 /* ----------------New_Way - url api SECURE----------------*/
 const urlOfData= process.env.API_URL;
 const firstPartOfurl= process.env.API_UrlOfElementFirstPart;
-const secondPartOfurl= process.env.API_UrlOfElementSecondPart;
 
 //----------------Globals Variables----------------
 let dataOfTopTen;
@@ -16,7 +15,7 @@ export let counterOfNews=0;
 
 
 export async function getNewFromID(itemNumber){
-    const URL=firstPartOfurl+itemNumber+secondPartOfurl;
+    const URL=firstPartOfurl+itemNumber+".json?print=pretty";
     let newsElement = await axios.get(URL)
     .then(function (response) {
         //----------------handle success----------------

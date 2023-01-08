@@ -20,4 +20,4 @@ src="src\images\mobileV1.png"
 src="src\images\mobileV2.png"
 />
 # Link al sito
-<link> https://hackernewsletter.netlify.app/ <!link>
+<link> https://rainbow-douhua-ac0b51.netlify.app/ <!link>

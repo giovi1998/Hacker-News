@@ -1,8 +1,8 @@
 exports.handler = async event => {
-  const API_KEY =  process.env.API_URL
+  const API_URL =  process.env.API_URL;
 
-  const response = await fetch(`endpoint/parameters&API_KEY=${API_URL}`)
-  const data = await response.json() 
+  const response = await fetch(`endpoint/parameters&API_KEY=${API_URL}`);
+  const data = await response.json();
 
   const pass = (data) => {
     return {
@@ -11,5 +11,5 @@ exports.handler = async event => {
     }
   }
 
-  return pass(data)
+  return pass(data);
 }

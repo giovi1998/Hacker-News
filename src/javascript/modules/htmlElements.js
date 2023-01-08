@@ -18,7 +18,7 @@ export function createDiv(className){
    return div;
 }
 
- export function createCardWithoutImage(indexElement,divMain,urlOfTheNewsElemente,title,timeOfNews){
+ export function createCardWithoutImage(indexElement,divMain,urlOfTheNewsElemente,title,timeOfNews,text){
    //----------------card----------------
    let divCard = document.createElement('div');
    divCard.className = `card card-${indexElement+1}`+" is-full mt-2 ml-6 mr-6";
@@ -49,13 +49,21 @@ export function createDiv(className){
                let divCardContent1 = document.createElement('div');
                divCardContent1.className = "card-content";
                divCardContent.appendChild(divCardContent1);
-                     //----------------content is inside card content1----------------
-                     let urlOfTheNews = document.createElement('a');
-                     urlOfTheNews.className = "content has-text-info";
-                     urlOfTheNews.target = "_blank";
-                     urlOfTheNews.href=urlOfTheNewsElemente;
-                     urlOfTheNews.textContent='Click here to read the news!';
-                     divCardContent1.appendChild(urlOfTheNews);
+                     //----------------Controll of the news----------------
+                     if(urlOfTheNewsElemente!=undefined){
+                        //----------------content is inside card content1----------------
+                        let urlOfTheNews = document.createElement('a');
+                        urlOfTheNews.className = "content has-text-info";
+                        urlOfTheNews.target = "_blank";
+                        urlOfTheNews.href=urlOfTheNewsElemente;
+                        urlOfTheNews.textContent='Click here to read the news!';
+                        divCardContent1.appendChild(urlOfTheNews);
+                     }
+                     if(text!=undefined){
+                        let pForText=createP(text+'\n');
+                        pForText.style.color="#111111";
+                        divCardContent1.appendChild(pForText);
+                  }
                      //----------------time is inside card content1----------------
                      let pTime = document.createElement('div');
                      pTime.className = "content has-text-grey";

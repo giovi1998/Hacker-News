@@ -4,7 +4,6 @@
 
 /* ----------------New_Way - url api SECURE----------------*/
 const urlOfData= process.env.API_URL;
-const firstPartOfurl= process.env.API_UrlOfElementFirstPart;
 
 //----------------Globals Variables----------------
 let dataOfTopTen;
@@ -15,7 +14,7 @@ export let counterOfNews=0;
 
 
 export async function getNewFromID(itemNumber){
-    const URL=firstPartOfurl+itemNumber+".json?print=pretty";
+    const URL="https://hacker-news.firebaseio.com/v0/item/"+itemNumber+".json?print=pretty";
     let newsElement = await axios.get(URL)
     .then(function (response) {
         //----------------handle success----------------

@@ -1,4 +1,5 @@
 exports.handler = async (event) => {
+    try {
     // Più tardi imposteremo una variabile d'ambiente interna a Netlify stesso, accessibile semplicemente così:
     const API_URL = process.env.API_URL;
     const API_UrlOfElementFirstPart = process.env.API_UrlOfElementFirstPart;
@@ -18,6 +19,12 @@ exports.handler = async (event) => {
         body: JSON.stringify(body),
       };
     };
-  
     return pass(data,data1,data2);
+    } catch(error){
+      console.log(error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Failed fetching data' }),
+    };
+  }  
   };

@@ -20,6 +20,7 @@ async function callLambdaFunction() {
     console.log(data); // Facciamo ciò che vogliamo coi dati ottenuti
   }
   
+
 callLambdaFunction();
 
 await getTopNewsId();

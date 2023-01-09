@@ -21,15 +21,9 @@ async function callLambdaFunction() {
   }
   
 
-const API_URL=await callLambdaFunction();
+const API_URL = await callLambdaFunction();
 
-console.log("Mi fermo qui");
-
-console.log(API_URL);
-
-
-
-await getTopNewsId();
+await getTopNewsId(API_URL);
 
 //----------------creeate H1---------------- 
 let content = "HACKER NEWS LETTER";

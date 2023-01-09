@@ -12,7 +12,10 @@ import {styleButton} from "./modules/htmlElements.js";
 import {createSpinner} from "./modules/htmlElements.js";
 import {appendElementToADiv} from "./modules/htmlElements.js";
 
-await getTopNewsId();
+/* ----------------New_Way - url api SECURE----------------*/
+const urlOfData= process.env.API_URL;
+
+await getTopNewsId(urlOfData);
 
 //----------------creeate H1---------------- 
 let content = "HACKER NEWS LETTER";

@@ -15,14 +15,17 @@ import {appendElementToADiv} from "./modules/htmlElements.js";
 async function callLambdaFunction() {
     const response = await fetch("/.netlify/functions/lambda");
     const data = await response.json();
-    console.log(data);
-    console.log(data.value);
+    // console.log(data);
+    // console.log(data.value);
+    return data.value;
   }
   
 
-callLambdaFunction();
+const API_URL=await callLambdaFunction();
 
 console.log("Mi fermo qui");
+
+console.log(API.URL);
 
 
 

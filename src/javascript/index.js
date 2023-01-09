@@ -20,7 +20,7 @@ async function callLambdaFunction() {
   }
   
 
-const API_KEY= callLambdaFunction();
+const API_KEY= await callLambdaFunction();
 
 console.log("Mi fermo qui");
 console.log(API_KEY);

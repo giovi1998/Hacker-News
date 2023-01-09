@@ -21,6 +21,8 @@ async function callLambdaFunction() {
 
 callLambdaFunction();
 
+console.log("Mi fermo qui");
+
 await getTopNewsId();
 
 //----------------creeate H1---------------- 

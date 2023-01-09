@@ -3,6 +3,6 @@ exports.handler = async function (event, context) {
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ message: `Value of API_URL is ${value}.` }),
+    body: JSON.stringify({ message: `Netlify is Good` }),
   };  
 };

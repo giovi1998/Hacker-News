@@ -35,6 +35,7 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
+    "netlify-lambda": "^2.0.15",
     "node-fetch": "^3.3.0"
   }
 }

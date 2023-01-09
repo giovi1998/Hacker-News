@@ -22,7 +22,7 @@ async function callLambdaFunction() {
 callLambdaFunction();
 
 console.log("Mi fermo qui");
-console.log(API_KEY);
+
 
 
 await getTopNewsId();

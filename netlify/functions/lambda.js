@@ -1,3 +1,4 @@
+import fetch from "node-fetch"
 exports.handler = async event => {
   const API_URL =  process.env.API_URL;
 

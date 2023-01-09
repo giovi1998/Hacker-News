@@ -15,7 +15,7 @@ import {appendElementToADiv} from "./modules/htmlElements.js";
 async function callLambdaFunction() {
     const response = await fetch("/.netlify/functions/lambda");
     const data = await response.json();
-    console.log(_.get(data,"value"));
+    console.log(data);
   }
   
 

@@ -17,14 +17,14 @@ async function callLambdaFunction() {
     const data = await response.json();
     console.log(data);
     // console.log(data.value);
-    const arrayOfApi= [data.value1,data.value2,data.value3];
-    return arrayOfApi;
+    const arrayOfEnv= [data.value1,data.value2,data.value3];
+    return arrayOfEnv;
   }
   
 
-const API = await callLambdaFunction();
+const ENV= await callLambdaFunction();
 
-await getTopNewsId(API[0]);
+await getTopNewsId(ENV[0],ENV[1],ENV[2]);
 
 //----------------creeate H1---------------- 
 let content = "HACKER NEWS LETTER";

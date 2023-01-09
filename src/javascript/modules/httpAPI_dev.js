@@ -17,7 +17,7 @@ export let counterOfNews=0;
 //----------------Get a news From ID----------------
 async function getNewFromID(itemNumber){
     const URL=firstUrlpartToGetNewsFromId+itemNumber+secondUrlpartToGetNewsFromId;
-    let newsElement = await axios.get(URL)
+    await axios.get(URL)
     .then(function (response) {
         //----------------handle success----------------
         let timeConvert = timeConverter(response.data.time);

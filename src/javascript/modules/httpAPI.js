@@ -6,9 +6,9 @@ let dataOfElementInCache;
 export let counterOfNews=0; 
 
 //----------------Get a news From ID----------------
-async function getNewFromID(itemNumber){
-    const URL="https://hacker-news.firebaseio.com/v0/item/"+itemNumber+".json?print=pretty";
-    let newsElement = await axios.get(URL)
+async function getNewFromID(itemNumber,urlFirstPart,urlSecondPart){
+    const URL=urlFirstPart+itemNumber+urlSecondPart;
+    await axios.get(URL)
     .then(function (response) {
         //----------------handle success----------------
         let timeConvert = timeConverter(response.data.time);
@@ -21,16 +21,16 @@ async function getNewFromID(itemNumber){
       });
 }
 
-export async function getTopNews(numberOfNews){
+export async function getTopNews(numberOfNews,urlFirstPart,urlSecondPart){
   if(counterOfNews==0){
     for(let i=0;i<numberOfNews;i++){
-      await getNewFromID(dataOfTopTen[i]);
+      await getNewFromID(dataOfTopTen[i],urlFirstPart,urlSecondPart);
       //----------------Push the News dataOfElementInCache----------------
       datas.push(dataOfElementInCache);
   }
   }else{
     for(let i=counterOfNews;i<numberOfNews;i++){
-      await getNewFromID(dataOfTopTen[i]);
+      await getNewFromID(dataOfTopTen[i],urlFirstPart,urlSecondPart);
       datas.push(dataOfElementInCache);//id of the News
     }
   }

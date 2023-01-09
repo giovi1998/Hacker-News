@@ -2,4 +2,4 @@
   functions = "./netlify/functions"
 
 [build.environment]
-  API_URL = https://hacker-news.firebaseio.com/v0/newstories.json
+  API_URL = "https://hacker-news.firebaseio.com/v0/newstories.json"

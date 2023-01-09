@@ -25,7 +25,7 @@ const API_URL=await callLambdaFunction();
 
 console.log("Mi fermo qui");
 
-console.log(API.URL);
+console.log(API_URL);
 
 
 

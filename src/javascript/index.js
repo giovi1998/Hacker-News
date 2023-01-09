@@ -13,7 +13,7 @@ import {createSpinner} from "./modules/htmlElements.js";
 import {appendElementToADiv} from "./modules/htmlElements.js";
 
 async function callLambdaFunction() {
-    const response = await fetch("../netlify/functions/lambda.js");
+    const response = await fetch("./netlify/functions/lambda.js");
     const data = await response.json();
     console.log(data);
   }

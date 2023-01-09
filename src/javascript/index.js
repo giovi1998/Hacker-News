@@ -11,11 +11,12 @@ import {createButton} from "./modules/htmlElements.js";
 import {styleButton} from "./modules/htmlElements.js";
 import {createSpinner} from "./modules/htmlElements.js";
 import {appendElementToADiv} from "./modules/htmlElements.js";
-
+let API_URL;
 async function callLambdaFunction() {
     const response = await fetch("/.netlify/functions/lambda");
     const data = await response.json();
     console.log(data);
+    API_URL=data;
   }
   
 

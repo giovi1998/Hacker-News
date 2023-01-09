@@ -15,15 +15,16 @@ import {appendElementToADiv} from "./modules/htmlElements.js";
 async function callLambdaFunction() {
     const response = await fetch("/.netlify/functions/lambda");
     const data = await response.json();
-    // console.log(data);
+    console.log(data);
     // console.log(data.value);
-    return data.value;
+    const arrayOfApi= [data.value1,data.value2,data.value3];
+    return arrayOfApi;
   }
   
 
-const API_URL = await callLambdaFunction();
+const API = await callLambdaFunction();
 
-await getTopNewsId(API_URL);
+await getTopNewsId(API[0]);
 
 //----------------creeate H1---------------- 
 let content = "HACKER NEWS LETTER";

@@ -1,6 +1,6 @@
 import '../css/styles.css';
 //----------------import Funtions from httpAPI.js----------------
-import {getTopNewsId,getTopNews,datas} from "./modules/httpAPI.js";
+import {getTopNewsId,getTopNews,datas} from "./modules/httpAPI_dev.js";
 
 //----------------import Funtions from CreateElements.js----------------
 import {createCardWithoutImage} from "./modules/htmlElements.js";
@@ -12,10 +12,7 @@ import {styleButton} from "./modules/htmlElements.js";
 import {createSpinner} from "./modules/htmlElements.js";
 import {appendElementToADiv} from "./modules/htmlElements.js";
 
-/* ----------------New_Way - url api SECURE----------------*/
-const urlOfData= process.env.API_URL;
-
-await getTopNewsId(urlOfData);
+await getTopNewsId();
 
 //----------------creeate H1---------------- 
 let content = "HACKER NEWS LETTER";
@@ -56,7 +53,8 @@ for(let i=0;i<10;i++){
     let url=_.get(datas[i],"url");
     let title=_.get(datas[i],"title");
     let time=_.get(datas[i],"time");
-    createCardWithoutImage(i,divMain,url,title,time);
+    let text=_.get(datas[i],"text");
+    createCardWithoutImage(i,divMain,url,title,time,text);
 }
 //----------------Create Load More News----------------
 let myButtonsLoad = createButton('Load More News');
@@ -78,15 +76,13 @@ async function loadNews(){
 
     await getTopNews(end);
     for(let i=start;i<end;i++){
-        createCardWithoutImage(i,divMain,datas[i].url,datas[i].title,datas[i].time);
+        let url=_.get(datas[i],"url");
+        let title=_.get(datas[i],"title");
+        let time=_.get(datas[i],"time");
+        let text=_.get(datas[i],"text");
+        createCardWithoutImage(i,divMain,url,title,time,text);
     }
     styleButton(myButtonsLoad,'button buttonMinus is-info is-light mt-2 mb-6');
     
     }
 }
-
-
-// const API_KEY= process.env.API_KEY;
-// const API_UrlOfElementFirstPart = process.env.API_UrlOfElementFirstPart;
-// const API_UrlOfElementSecondPart = process.env.API_UrlOfElementSecondPart;
-// console.log(API_UrlOfElementFirstPart +API_UrlOfElementSecondPart);

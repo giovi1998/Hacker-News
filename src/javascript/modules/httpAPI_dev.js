@@ -1,3 +1,12 @@
+/* ----------------Old way - url api NOT SECURE----------------
+ const urlOfData = "https://hacker-news.firebaseio.com/v0/newstories.json" 
+*/
+
+/* ----------------New_Way - url api SECURE----------------*/
+const urlOfData= process.env.API_URL;
+const firstUrlpartToGetNewsFromId=process.env.firstUrlpartToGetNewsFromId;
+const secondUrlpartToGetNewsFromId=process.env.secondUrlpartToGetNewsFromId;
+
 //----------------Globals Variables----------------
 let dataOfTopTen;
 export let datas = new Array;
@@ -7,7 +16,7 @@ export let counterOfNews=0;
 
 //----------------Get a news From ID----------------
 async function getNewFromID(itemNumber){
-    const URL="https://hacker-news.firebaseio.com/v0/item/"+itemNumber+".json?print=pretty";
+    const URL=firstUrlpartToGetNewsFromId+itemNumber+secondUrlpartToGetNewsFromId;
     let newsElement = await axios.get(URL)
     .then(function (response) {
         //----------------handle success----------------
@@ -38,12 +47,12 @@ export async function getTopNews(numberOfNews){
 }
 
 //----------------Array of 500 news----------------
-export async function getTopNewsId(urlOfData){
-    await getTopNewsFromApi(urlOfData); 
+export async function getTopNewsId(){
+    await getTopNewsFromApi(); 
     return dataOfTopTen;
 }
 
-async function getTopNewsFromApi(urlOfData){
+async function getTopNewsFromApi(){
     //----------------Get 500 News----------------
     await axios.get(urlOfData) 
     .then(function (response) {

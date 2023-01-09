@@ -16,15 +16,18 @@ async function callLambdaFunction() {
     const response = await fetch("/.netlify/functions/lambda");
     const data = await response.json();
     console.log(data);
-    // console.log(data.value);
+    console.log(data.value1);
+    console.log(data.value2);
+    console.log(data.value3);
     const arrayOfEnv= [data.value1,data.value2,data.value3];
     return arrayOfEnv;
   }
   
 
-const ENV= await callLambdaFunction();
+const enVariables= await callLambdaFunction();
+console.log(enVariables);
 
-await getTopNewsId(ENV[0],ENV[1],ENV[2]);
+await getTopNewsId(enVariables[0]);
 
 //----------------creeate H1---------------- 
 let content = "HACKER NEWS LETTER";
@@ -53,7 +56,7 @@ let divMain = createDiv("container");
 let divSpinner = createSpinner("lds-dual-ring is-flex-direction-column mt-1");
 
 //----------------Get info----------------
-await getTopNews(10);
+await getTopNews(10,enVariables[1],enVariables[2]);
 //----------------Create Card image----------------
 for(let i=0;i<10;i++){
     //----------------Hide Element Spinner----------------
@@ -86,7 +89,7 @@ async function loadNews(){
             //----------------Set loading class when it's loading new News----------------
     myButtonsLoad.className='button is-warning is-loading mt-2 mb-6';
 
-    await getTopNews(end);
+    await getTopNews(end,enVariables[1],enVariables[2]);
     for(let i=start;i<end;i++){
         let url=_.get(datas[i],"url");
         let title=_.get(datas[i],"title");

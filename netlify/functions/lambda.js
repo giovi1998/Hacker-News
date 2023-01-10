@@ -8,6 +8,7 @@ exports.handler = async function (event, context) {
     body: JSON.stringify({
       value1: API_URL,
       value2:firstUrlpartToGetNewsFromId,
-      value3: secondUrlpartToGetNewsFromId}),
+      value3: secondUrlpartToGetNewsFromId,
+    }),
   };  
 };

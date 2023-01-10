@@ -51,15 +51,18 @@ export function createDiv(className){
                divCardContent.appendChild(divCardContent1);
                      //----------------Controll of the news----------------
                      if(text!=undefined){
+                        let textCardContent=text;
+                        //----------------Delete >p> from the news----------------
+                        textCardContent=textCardContent.replace("<p>","\n ");
                         if(text.length>=250){
                            //----------------Make all the news length maximum 250 char----------------
-                           let textContentShort=text.slice(0,247);
+                           let textContentShort=textCardContent.slice(0,247);
                            textContentShort=textContentShort+"...";
                            let pForText=createP(textContentShort);
                            pForText.style.color="#111111";
                            divCardContent1.appendChild(pForText);
                         }else{
-                           let pForText=createP(text);
+                           let pForText=createP(textCardContent);
                            pForText.style.color="#111111";
                            divCardContent1.appendChild(pForText);
                         }

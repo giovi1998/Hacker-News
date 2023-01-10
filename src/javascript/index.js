@@ -45,7 +45,7 @@ appendElementToADiv(divHeader,p);
 let urlOfTheNews = document.createElement('a');
 urlOfTheNews.className = "content has-text-info";
 urlOfTheNews.target = "_blank";
-urlOfTheNews.href="https://github.com/giovi1998/HackerNews.git";
+urlOfTheNews.href="https://github.com/giovi1998/Hacker-News.git";
 urlOfTheNews.textContent=' GitHub repository.';
 p.appendChild(urlOfTheNews);
 

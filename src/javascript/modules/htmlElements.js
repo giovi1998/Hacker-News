@@ -50,6 +50,12 @@ export function createDiv(className){
                divCardContent1.className = "card-content";
                divCardContent.appendChild(divCardContent1);
                      //----------------Controll of the news----------------
+                     if(text!=undefined){
+                        let pForText=createP(text);
+                        pForText.style.color="#111111";
+                        divCardContent1.appendChild(pForText);
+                     }
+
                      if(urlOfTheNewsElemente!=undefined){
                         //----------------content is inside card content1----------------
                         let urlOfTheNews = document.createElement('a');
@@ -59,11 +65,6 @@ export function createDiv(className){
                         urlOfTheNews.textContent='Click here to read the news!';
                         divCardContent1.appendChild(urlOfTheNews);
                      }
-                     if(text!=undefined){
-                        let pForText=createP(text+'\n');
-                        pForText.style.color="#111111";
-                        divCardContent1.appendChild(pForText);
-                  }
                      //----------------time is inside card content1----------------
                      let pTime = document.createElement('div');
                      pTime.className = "content has-text-grey";
@@ -77,8 +78,8 @@ export function createDiv(className){
     let p = document.createElement('p');
     //----------------2. Center the P element---------------- 
     p.className='text-align-center';
-    //----------------3. Set content---------------- 
-    p.textContent = content;
+    //----------------3. Set content and use only this characters---------------- 
+    p.textContent = content.replace(/[^a-zA-Z-+@#*()/<>0123456789_.,!"':?= ]/g, "");
     return p;
  }
 

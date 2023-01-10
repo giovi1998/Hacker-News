@@ -23,8 +23,9 @@ body{
 
 
 p{
-    display: inline-block;
     color:white;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
 }
 
 .lds-dual-ring {

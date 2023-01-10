@@ -15,17 +15,17 @@ import {appendElementToADiv} from "./modules/htmlElements.js";
 async function callLambdaFunction() {
     const response = await fetch("/.netlify/functions/lambda");
     const data = await response.json();
-    console.log(data);
-    console.log(data.value1);
-    console.log(data.value2);
-    console.log(data.value3);
+    // console.log(data);
+    // console.log(data.value1);
+    // console.log(data.value2);
+    // console.log(data.value3);
     const arrayOfEnv= [data.value1,data.value2,data.value3];
     return arrayOfEnv;
   }
   
 
 const enVariables= await callLambdaFunction();
-console.log(enVariables);
+// console.log(enVariables);
 
 await getTopNewsId(enVariables[0]);
 

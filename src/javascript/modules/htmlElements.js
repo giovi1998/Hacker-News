@@ -55,12 +55,13 @@ export function createDiv(className){
                         //----------------Delete >p> from the news----------------
                         textCardContent=textCardContent.replace("<p>","\n ");
                         if(text.length>=250){
-                           //----------------Make all the news length maximum 250 char----------------
+                           //---------------- If mobile make all the news length maximum 250 char----------------
                            let textContentShort=textCardContent.slice(0,247);
-                           textContentShort=textContentShort+"...";
-                           let pForText=createP(textContentShort);
-                           pForText.style.color="#111111";
-                           divCardContent1.appendChild(pForText);
+                           textContentShort=textContentShort +"...";
+                           let pForTextMobile=createPForCardMobileAndTablet(textContentShort);
+                           let pForTextDesktop=createPForCardDesktop(textCardContent);
+                           divCardContent1.appendChild(pForTextMobile);
+                           divCardContent1.appendChild(pForTextDesktop);
                         }else{
                            let pForText=createP(textCardContent);
                            pForText.style.color="#111111";
@@ -95,6 +96,28 @@ export function createDiv(className){
     p.textContent = content.replace(/[^a-zA-Z-+@#*()/<>0123456789_.,!"':?= ]/g, "");
     return p;
  }
+
+function createPForCardMobileAndTablet(content){
+    //----------------1. Create <p> element---------------- 
+    let p = document.createElement('p');
+    //----------------2. Center the P element---------------- 
+    p.className='text-align-center is-hidden-desktop';
+    //----------------3. Set content and use only this characters---------------- 
+    p.textContent = content.replace(/[^a-zA-Z-+@#*()/<>0123456789_.,!"':?= ]/g, "");
+    p.style.color="#111111";
+    return p;
+ }
+
+ function createPForCardDesktop(content){
+   //----------------1. Create <p> element---------------- 
+   let p = document.createElement('p');
+   //----------------2. Center the P element---------------- 
+   p.className='text-align-center is-hidden-touch';
+   //----------------3. Set content and use only this characters---------------- 
+   p.textContent = content.replace(/[^a-zA-Z-+@#*()/<>0123456789_.,!"':?= ]/g, "");
+   p.style.color="#111111";
+   return p;
+}
 
  export function createH1(className, content){
     //----------------1. Create <H1> element---------------- 

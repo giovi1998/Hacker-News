@@ -51,12 +51,12 @@ export function createDiv(className){
                divCardContent.appendChild(divCardContent1);
                      //----------------Controll of the news----------------
                      if(text!=undefined){
-                        let textCardContent=text;
+                        console.log(text);
                         //----------------Delete >p> from the news----------------
-                        textCardContent=textCardContent.replace("<p>","\n ");
-                        if(text.length>=250){
+                        let textCardContent=text.replaceAll("<p>","<br /> ");
+                        if(text.length>=200){
                            //---------------- If mobile make all the news length maximum 250 char----------------
-                           let textContentShort=textCardContent.slice(0,247);
+                           let textContentShort=textCardContent.slice(0,197);
                            textContentShort=textContentShort +"...";
                            let pForTextMobile=createPForCardMobileAndTablet(textContentShort);
                            let pForTextDesktop=createPForCardDesktop(textCardContent);
@@ -93,7 +93,7 @@ export function createDiv(className){
     //----------------2. Center the P element---------------- 
     p.className='text-align-center';
     //----------------3. Set content and use only this characters---------------- 
-    p.textContent = content.replace(/[^a-zA-Z-+@#*()/<>0123456789_.,!"':?= ]/g, "");
+    p.textContent = content;
     return p;
  }
 
@@ -103,7 +103,7 @@ function createPForCardMobileAndTablet(content){
     //----------------2. Center the P element---------------- 
     p.className='text-align-center is-hidden-desktop';
     //----------------3. Set content and use only this characters---------------- 
-    p.textContent = content.replace(/[^a-zA-Z-+@#*()/<>0123456789_.,!"':?= ]/g, "");
+    p.innerHTML = content;
     p.style.color="#111111";
     return p;
  }
@@ -114,7 +114,7 @@ function createPForCardMobileAndTablet(content){
    //----------------2. Center the P element---------------- 
    p.className='text-align-center is-hidden-touch';
    //----------------3. Set content and use only this characters---------------- 
-   p.textContent = content.replace(/[^a-zA-Z-+@#*()/<>0123456789_.,!"':?= ]/g, "");
+   p.innerHTML = content;
    p.style.color="#111111";
    return p;
 }

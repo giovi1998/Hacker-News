@@ -58,10 +58,13 @@ export function createDiv(className){
                            //---------------- If mobile make all the news length maximum 250 char----------------
                            let textContentShort=textCardContent.slice(0,197);
                            textContentShort=textContentShort +"...";
+                           //---------------- Visibile only for Mobile and tablet----------------
                            let pForTextMobile=createPForCardMobileAndTablet(textContentShort);
-                           let pForTextDesktop=createPForCardDesktop(textCardContent);
+                           //---------------- Visibile only for Desktop----------------
+                           let pForTextDesktop=createPForCardDesktop(textCardContent);                     
                            divCardContent1.appendChild(pForTextMobile);
                            divCardContent1.appendChild(pForTextDesktop);
+                           //modalForCardWithMuchText(textCardContent,divCardContent1,indexElement);
                         }else{
                            let pForText=createP(textCardContent);
                            pForText.style.color="#111111";
@@ -93,7 +96,7 @@ export function createDiv(className){
     //----------------2. Center the P element---------------- 
     p.className='text-align-center';
     //----------------3. Set content and use only this characters---------------- 
-    p.textContent = content;
+    p.innerHTML = content;
     return p;
  }
 
@@ -146,9 +149,108 @@ export function createButton(innerOfButton){
     div.appendChild(element);
  }
 
+//  function modalForCardWithMuchText(pText,divCardContent1,indexElement){
+//    //----------------Create P Element---------------- 
+//    let p = createPForCardMobileAndTablet(pText);
+//    //----------------Create divModal---------------- 
+//    let divModal=createDiv("modal");
+//    divModal.id="Modal-"+indexElement;
+//    divCardContent1.appendChild(divModal);
+//          //----------------Create divModal bg---------------- 
+//          let divModalBg=createDiv("modal-background");
+//          divModal.appendChild(divModalBg);
+//          //----------------Create div Modal-card---------------- 
+//          let divModalCard=createDiv("modal-card");
+         
+//                //----------------Create header Modal-card---------------- 
+//                let divModalheader=createDiv("modal-card-head");
+//                      //----------------Create title of header---------------- 
+//                      let h1=createH1("modal-card-title","modal h1");
+//                      appendElementToADiv(divModalheader,h1);
+//                      //----------------Create button of header---------------- 
+//                      let buttonHeader=document.createElement("button");
+//                      buttonHeader.innerHTML = "OpenJs";
+//                      buttonHeader.className ="delete";
+//                      buttonHeader.ariaLabel="close";
+//                   appendElementToADiv(divModalheader,buttonHeader);
+//                divModal.appendChild(divModalheader);   
+//                //----------------Create section of header---------------- 
+//                let section=document.createElement("section");
+//                section.className="modal-card-body";
+//                section.appendChild(p);   
+
+//          divModal.appendChild(divModalCard);          
+   
+//    // button.setAttribute("data-target", `Media-${indexElement}`);
+
+//    // addEventListenerToButtonForModal(`Media-${indexElement}`);
+
+//    // <div class="modal" id="myModal">
+//    //    <div class="modal-background"></div>
+//    //    <div class="modal-card">
+//    //      <header class="modal-card-head">
+//    //        <p class="modal-card-title">My first modal</p>
+//    //        <button class="delete" aria-label="close"></button>
+//    //      </header>
+//    //      <section class="modal-card-body">
+//    //        <!-- Modal content here -->
+//    //      </section>
+//    //      <footer class="modal-card-foot">
+//    //        <button class="button is-primary">Prova</button>
+//    //      </footer>
+//    //    </div>
+//    //  </div>
 
 
- 
+//  }
+
+
+// //  function addEventListenerToButtonForModal(modalElementId){
+// //    document.addEventListener('DOMContentLoaded', () => {
+// //       // Functions to open and close a modal
+// //       function openModal($el) {
+// //         $el.classList.add('is-active');
+// //       }
+    
+// //       function closeModal($el) {
+// //         $el.classList.remove('is-active');
+// //       }
+    
+// //       function closeAllModals() {
+// //         (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+// //           closeModal($modal);
+// //         });
+// //       }
+    
+// //       // Add a click event on buttons to open a specific modal
+// //       (document.querySelectorAll(modalElementId) || []).forEach(($trigger) => {
+// //         const modal = $trigger.dataset.target;
+// //         const $target = document.getElementById(modal);
+    
+// //         $trigger.addEventListener('click', () => {
+// //           openModal($target);
+// //         });
+// //       });
+    
+// //       // Add a click event on various child elements to close the parent modal
+// //       (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+// //         const $target = $close.closest('.modal');
+    
+// //         $close.addEventListener('click', () => {
+// //           closeModal($target);
+// //         });
+// //       });
+    
+// //       // Add a keyboard event to close all modals
+// //       document.addEventListener('keydown', (event) => {
+// //         const e = event || window.event;
+    
+// //         if (e.keyCode === 27) { // Escape key
+// //           closeAllModals();
+// //         }
+// //       });
+// //     });
+// //  }
 
  
 

@@ -51,6 +51,7 @@ module.exports = (env, argv) => {
       new HtmlWebpackPlugin({
         title: "Hacker News",
         template: path.resolve(__dirname, "./src/index.html"),
+        favicon: "./src/images//Favicon.png",
       }),
       // Qui dotenv-webpack viene inizializzato
       new Dotenv(),

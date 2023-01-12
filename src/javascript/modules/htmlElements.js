@@ -56,7 +56,7 @@ export function createDiv(className){
                      //----------------Controll of the news----------------
                      if(text!=undefined){
                         //----------------Delete >p> from the news----------------
-                        let textCardContent1=text.replaceAll(":",":<br /> ");
+                        let textCardContent1=text.replaceAll(": ",": <br /> ");
                         let textCardContent2=textCardContent1.replaceAll("*","");
                         let textCardContent=textCardContent2.replaceAll("<p>","<br /> ");
                         if(text.length>=200){

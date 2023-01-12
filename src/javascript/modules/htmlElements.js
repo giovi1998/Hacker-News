@@ -158,6 +158,7 @@ export function createButton(innerOfButton){
  function modalForCardWithMuchText(pText,title,divCardContent1,indexElement){
    //----------------Create P Element---------------- 
    let p = createPForCardMobileAndTablet(pText);
+   p.style.maxWidth="90%";
    p.className="mr-5 ml-5";
 
    //----------------Create the modal element----------------
@@ -199,6 +200,8 @@ export function createButton(innerOfButton){
    modalCardBody.classList.add("modal-card-body");
    modalCardBody.className='is-flex';
    modalCardBody.style.overflowY = "auto";
+   modalCardBody.style.maxHeight="80%";
+   modalCardBody.style.overflowX = "hidden";
    modalCardBody.appendChild(p);
    modalCard.appendChild(modalCardBody);
 

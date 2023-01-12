@@ -1,3 +1,7 @@
+//---------------- Scrolling---------------- 
+let currentY;
+let currentX 
+
 export function createDiv(className){
     //----------------1. Create <div> element---------------- 
     let div = document.createElement('div');
@@ -51,9 +55,10 @@ export function createDiv(className){
                divCardContent.appendChild(divCardContent1);
                      //----------------Controll of the news----------------
                      if(text!=undefined){
-                        console.log(text);
                         //----------------Delete >p> from the news----------------
-                        let textCardContent=text.replaceAll("<p>","<br /> ");
+                        let textCardContent1=text.replaceAll(":",":<br /> ");
+                        let textCardContent2=textCardContent1.replaceAll("*","");
+                        let textCardContent=textCardContent2.replaceAll("<p>","<br /> ");
                         if(text.length>=200){
                            //---------------- If mobile make all the news length maximum 250 char----------------
                            let textContentShort=textCardContent.slice(0,197);
@@ -64,7 +69,8 @@ export function createDiv(className){
                            let pForTextDesktop=createPForCardDesktop(textCardContent);                     
                            divCardContent1.appendChild(pForTextMobile);
                            divCardContent1.appendChild(pForTextDesktop);
-                           //modalForCardWithMuchText(textCardContent,divCardContent1,indexElement);
+                           modalForCardWithMuchText(textCardContent,title,divCardContent1,indexElement);
+                           createModalButton(divCardContent1,indexElement);
                         }else{
                            let pForText=createP(textCardContent);
                            pForText.style.color="#111111";
@@ -149,109 +155,91 @@ export function createButton(innerOfButton){
     div.appendChild(element);
  }
 
-//  function modalForCardWithMuchText(pText,divCardContent1,indexElement){
-//    //----------------Create P Element---------------- 
-//    let p = createPForCardMobileAndTablet(pText);
-//    //----------------Create divModal---------------- 
-//    let divModal=createDiv("modal");
-//    divModal.id="Modal-"+indexElement;
-//    divCardContent1.appendChild(divModal);
-//          //----------------Create divModal bg---------------- 
-//          let divModalBg=createDiv("modal-background");
-//          divModal.appendChild(divModalBg);
-//          //----------------Create div Modal-card---------------- 
-//          let divModalCard=createDiv("modal-card");
-         
-//                //----------------Create header Modal-card---------------- 
-//                let divModalheader=createDiv("modal-card-head");
-//                      //----------------Create title of header---------------- 
-//                      let h1=createH1("modal-card-title","modal h1");
-//                      appendElementToADiv(divModalheader,h1);
-//                      //----------------Create button of header---------------- 
-//                      let buttonHeader=document.createElement("button");
-//                      buttonHeader.innerHTML = "OpenJs";
-//                      buttonHeader.className ="delete";
-//                      buttonHeader.ariaLabel="close";
-//                   appendElementToADiv(divModalheader,buttonHeader);
-//                divModal.appendChild(divModalheader);   
-//                //----------------Create section of header---------------- 
-//                let section=document.createElement("section");
-//                section.className="modal-card-body";
-//                section.appendChild(p);   
+ function modalForCardWithMuchText(pText,title,divCardContent1,indexElement){
+   //----------------Create P Element---------------- 
+   let p = createPForCardMobileAndTablet(pText);
+   p.className="mr-5 ml-5";
 
-//          divModal.appendChild(divModalCard);          
+   //----------------Create the modal element----------------
+   var modal = document.createElement("div");
+   modal.classList.add("modal");
+   modal.className='modal is-hidden-desktop is-rounded ml-5 mr-5';
+   modal.setAttribute("id", `Modal-${indexElement}`);
+
+   //----------------Create the modal background element----------------
+   var modalBackground = document.createElement("div");
+   modalBackground.classList.add("modal-background");
+   modal.appendChild(modalBackground);
+
+   //----------------Create the modal card element----------------
+   var modalCard = document.createElement("div");
+   modalCard.classList.add("modal-card");
+   modal.appendChild(modalCard);
+
+   //----------------Create the modal card head element----------------
+   var modalCardHead = document.createElement("header");
+   modalCardHead.classList.add("modal-card-head");
+   modalCard.appendChild(modalCardHead);
+
+   //----------------Create the modal card title element----------------
+   var modalCardTitle = document.createElement("p");
+   modalCardTitle.classList.add("modal-card-title");
+   modalCardTitle.className='title is-4 ml-2 mr-2';
+   modalCardTitle.innerText = title;
+   modalCardHead.appendChild(modalCardTitle);
+
+   //----------------Create the close modal button element----------------
+   var closeModalButton = document.createElement("button");
+   closeModalButton.classList.add("delete");
+   closeModalButton.setAttribute("id",`close-modal-${indexElement}`);
+   modalCardHead.appendChild(closeModalButton);
+
+   //----------------Create the modal card body element----------------
+   var modalCardBody = document.createElement("section");
+   modalCardBody.classList.add("modal-card-body");
+   modalCardBody.className='is-flex';
+   modalCardBody.style.overflowY = "auto";
+   modalCardBody.appendChild(p);
+   modalCard.appendChild(modalCardBody);
+
+   //----------------Create the modal card footer element----------------
+   var modalCardFooter = document.createElement("footer");
+   modalCardFooter.classList.add("modal-card-foot");
+   modalCard.appendChild(modalCardFooter);
    
-//    // button.setAttribute("data-target", `Media-${indexElement}`);
+   //----------------Append modal to the body----------------
+   divCardContent1.appendChild(modal);
 
-//    // addEventListenerToButtonForModal(`Media-${indexElement}`);
+   }
+   
+   function createModalButton(divCardContent1,indexElement) {
+      //----------------Create the show modal button element----------------
+      var showModalButton = document.createElement("button");
+      showModalButton.classList.add("button", "is-primary");
+      showModalButton.className="button my-buttonShow is-primary is-hidden-desktop";
+      showModalButton.setAttribute("id", "show-modal");
+      showModalButton.innerText = "Show Modal";
 
-//    // <div class="modal" id="myModal">
-//    //    <div class="modal-background"></div>
-//    //    <div class="modal-card">
-//    //      <header class="modal-card-head">
-//    //        <p class="modal-card-title">My first modal</p>
-//    //        <button class="delete" aria-label="close"></button>
-//    //      </header>
-//    //      <section class="modal-card-body">
-//    //        <!-- Modal content here -->
-//    //      </section>
-//    //      <footer class="modal-card-foot">
-//    //        <button class="button is-primary">Prova</button>
-//    //      </footer>
-//    //    </div>
-//    //  </div>
+      //----------------Append button to the divcontent----------------
+      divCardContent1.appendChild(showModalButton);
 
+      //----------------add listeners to show and hide modal when button is clicked----------------
+      showModalButton.addEventListener("click", function() {
+         //----------------When the modal is shown, we want a fixed body----------------
+         currentX = window.pageXOffset;
+         currentY = window.pageYOffset;
+         document.body.style.position = 'fixed';
+         document.getElementById(`Modal-${indexElement}`).classList.add("is-active");
+      });
 
-//  }
+      document.getElementById(`close-modal-${indexElement}`).addEventListener("click", function() {
+          //----------------When the modal is hidden----------------
+         document.body.style.position = '';
+         window.scrollTo(currentX,currentY);
+         document.getElementById(`Modal-${indexElement}`).classList.remove("is-active");
+      });
+  }
 
-
-// //  function addEventListenerToButtonForModal(modalElementId){
-// //    document.addEventListener('DOMContentLoaded', () => {
-// //       // Functions to open and close a modal
-// //       function openModal($el) {
-// //         $el.classList.add('is-active');
-// //       }
     
-// //       function closeModal($el) {
-// //         $el.classList.remove('is-active');
-// //       }
-    
-// //       function closeAllModals() {
-// //         (document.querySelectorAll('.modal') || []).forEach(($modal) => {
-// //           closeModal($modal);
-// //         });
-// //       }
-    
-// //       // Add a click event on buttons to open a specific modal
-// //       (document.querySelectorAll(modalElementId) || []).forEach(($trigger) => {
-// //         const modal = $trigger.dataset.target;
-// //         const $target = document.getElementById(modal);
-    
-// //         $trigger.addEventListener('click', () => {
-// //           openModal($target);
-// //         });
-// //       });
-    
-// //       // Add a click event on various child elements to close the parent modal
-// //       (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
-// //         const $target = $close.closest('.modal');
-    
-// //         $close.addEventListener('click', () => {
-// //           closeModal($target);
-// //         });
-// //       });
-    
-// //       // Add a keyboard event to close all modals
-// //       document.addEventListener('keydown', (event) => {
-// //         const e = event || window.event;
-    
-// //         if (e.keyCode === 27) { // Escape key
-// //           closeAllModals();
-// //         }
-// //       });
-// //     });
-// //  }
-
- 
 
  

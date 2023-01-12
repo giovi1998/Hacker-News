@@ -13,6 +13,12 @@ body{
     align-items: center;
 }
 
+@media only screen and (min-width: 1024px) {
+  body.modal-open{
+    overflow: hidden;
+  }
+}
+
 .container {
     display: block;
 
@@ -52,4 +58,18 @@ p{
     100% {
       transform: rotate(360deg);
     }
+  }
+
+  .modal-card {
+    width: 80%;
+    background-color: white;
+  }
+
+  .modal-card-body{
+    max-height: 80%;
+    overflow-y:auto;
+  }
+
+  .my-buttonShow{
+    display: block;
   }

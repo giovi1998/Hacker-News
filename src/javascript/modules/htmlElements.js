@@ -71,9 +71,9 @@ export function createDiv(className){
                      if(text!=undefined){
                         //----------------Delete >p> from the news----------------
                         let textCardContent=optimizeText(text);
-                        if(text.length>=200){
+                        if(text.length>=150){
                            //---------------- If mobile make all the news length maximum 250 char----------------
-                           let textContentShort=textCardContent.slice(0,197);
+                           let textContentShort=textCardContent.slice(0,147);
                            textContentShort=textContentShort +"...";
                            //---------------- Visibile only for Mobile and tablet----------------
                            let pForTextMobile=createPForCardMobileAndTablet(textContentShort);
@@ -253,7 +253,7 @@ function appendElementToADiv(div,element){
       let showModalButton = document.createElement("button");
       showModalButton.className="button my-buttonShow is-primary is-hidden-desktop";
       showModalButton.setAttribute("id", "show-modal");
-      showModalButton.innerText = "Show Modal";
+      showModalButton.innerText = "Show the news text";
 
       //----------------Append button to the divcontent----------------
       divCardContent1.appendChild(showModalButton);

@@ -20,7 +20,7 @@ async function getNewFromID(itemNumber){
     await axios.get(URL)
     .then(function (response) {
         //----------------handle success----------------
-        let data=_.get(response,"data")
+        let data=_.get(response,"data");
         let timeConvert = timeConverter(_.get(data,"time"));
         dataOfElementInCache=data;
         dataOfElementInCache.time=timeConvert;
@@ -60,7 +60,8 @@ async function getTopNewsFromApi(){
         //----------------handle success----------------
         let array=new Array;
         for(let i=0;i<500;i++) {
-            array.push(response.data[i]);
+          let data=_.get(response,"data");
+            array.push(data[i]);
         }
         dataOfTopTen=array;
       })

@@ -15,6 +15,7 @@ async function getNewFromID(itemNumber,urlFirstPart,urlSecondPart){
         let timeConvert = timeConverter(_.get(data,"time"));
         dataOfElementInCache=data;
         dataOfElementInCache.time=timeConvert;
+        
       })
       .catch(function (error) {
         //----------------handle error----------------
@@ -49,10 +50,12 @@ async function getTopNewsFromApi(urlOfData){
     await axios.get(urlOfData) 
     .then(function (response) {
         //----------------handle success----------------
+        let data=_.get(response,"data");
         let array=new Array;
         for(let i=0;i<500;i++) {
-          let data=_.get(response,"data");
+          if(data[i]!=undefined){
             array.push(data[i]);
+          }
         }
         dataOfTopTen=array;
       })

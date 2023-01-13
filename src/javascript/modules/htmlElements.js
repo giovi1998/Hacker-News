@@ -109,7 +109,7 @@ export function createDiv(className){
 function optimizeText(text){
    let textCardContent1=text.replaceAll(". ",". <br />");
    let textCardContent2=textCardContent1.replaceAll("*","");
-   let textCardContent3=textCardContent2.replaceAll("?","? <br />");
+   let textCardContent3=textCardContent2.replaceAll("? ","? <br />");
    let textCardContent4=textCardContent3.replaceAll("!","! <br />");
    let textCardContent=textCardContent4.replaceAll("<p>","<br /> ");
    return textCardContent;

@@ -1,5 +1,6 @@
 // Plugin che ci permette di utilizzare un template nel codice sorgente e ottimizzarlo per la versione che andrà online
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+
 // Libreria che ci permette di utilizzare le Environment Variables durante lo sviluppo locale
 const Dotenv = require("dotenv-webpack");
 // Modulo di NodeJS che dà la possibilità di interagire con file e cartelle locali
@@ -51,7 +52,8 @@ module.exports = (env, argv) => {
       new HtmlWebpackPlugin({
         title: "Hacker News",
         template: path.resolve(__dirname, "./src/index.html"),
-        favicon: "./src/images//Favicon.png",
+        favicon: "./src/images//Favicon.jpg",
+        
       }),
       // Qui dotenv-webpack viene inizializzato
       new Dotenv(),
@@ -62,6 +64,9 @@ module.exports = (env, argv) => {
     
     experiments: {
       topLevelAwait: true
-    }
+    },
+    performance: { 
+      hints: false 
+    },
   };
 };

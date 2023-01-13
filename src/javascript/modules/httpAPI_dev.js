@@ -20,8 +20,9 @@ async function getNewFromID(itemNumber){
     await axios.get(URL)
     .then(function (response) {
         //----------------handle success----------------
-        let timeConvert = timeConverter(response.data.time);
-        dataOfElementInCache=response.data;
+        let data=_.get(response,"data")
+        let timeConvert = timeConverter(_.get(data,"time"));
+        dataOfElementInCache=data;
         dataOfElementInCache.time=timeConvert;
       })
       .catch(function (error) {

@@ -2,6 +2,29 @@
 let currentY;
 let currentX 
 
+export function createTitleAndParagraphOfThePage(){
+   //----------------creeate H1---------------- 
+   let content = "HACKER NEWS LETTER";
+   let className = "title is-3 has-text-white mt-5 mr-5 ml-5";
+   let h1= createH1(className,content);
+   //----------------append to the H1 to body element----------------
+   document.body.append(h1);
+
+   //----------------Create Div of the Header with Paragraph and title----------------
+   let divHeader = createDiv("mr-5 ml-5");
+   let content1 = "Latest news from Hacker News. Below you can see a series of news with the title, link and the time it was published. For more information, see the "; 
+   let p = createP(content1);
+   //----------------append p element to div element----------------
+   appendElementToADiv(divHeader,p);
+   let urlOfTheNews = document.createElement('a');
+   urlOfTheNews.className = "content has-text-info";
+   urlOfTheNews.target = "_blank";
+   urlOfTheNews.href="https://github.com/giovi1998/Hacker-News.git";
+   urlOfTheNews.textContent=' GitHub repository.';
+   p.appendChild(urlOfTheNews);
+
+}
+
 export function createDiv(className){
     //----------------1. Create <div> element---------------- 
     let div = document.createElement('div');
@@ -22,43 +45,32 @@ export function createDiv(className){
    return div;
 }
 
- export function createCardWithoutImage(indexElement,divMain,urlOfTheNewsElemente,title,timeOfNews,text){
+ export function createCardWithoutImage(indexElement,divMain,href,title,timeOfNews,text){
    //----------------card----------------
-   let divCard = document.createElement('div');
-   divCard.className = `card card-${indexElement+1}`+" is-full mt-2 ml-6 mr-6";
+   let divCard = createDiv(`card card-${indexElement+1}`+" is-full mt-2 ml-6 mr-6");
    divMain.appendChild(divCard);
          //----------------card-content----------------
-         let divCardContent = document.createElement('div');
-         divCardContent.className = "card-content is-fullwidth";
+         let divCardContent = createDiv("card-content is-fullwidth");
          divCard.appendChild(divCardContent);
                //----------------Media is-align----------------
-               let divMedia = document.createElement('div');
-               divMedia.className = "media is-align-items-center";
+               let divMedia = createDiv("media is-align-items-center");
                divCardContent.appendChild(divMedia);
                      //----------------Media left is inside Media is-align----------------
-                     let divMediaLeft = document.createElement('div');
-                     divMediaLeft.className = `media-left mediaLeft-${indexElement+1}`;
+                     let divMediaLeft = createDiv(`media-left mediaLeft-${indexElement+1}`);
                      divMedia.appendChild(divMediaLeft);
                      //----------------Media content is inside Media is-align----------------
-                     let divMediaContent = document.createElement('div');
-                     divMediaContent.className = "media-content";
+                     let divMediaContent =createDiv("media-content");
                      divMedia.appendChild(divMediaContent);
                               //----------------H1 is inside Media-Content----------------
-                              let h1 = document.createElement('H1');
-                              let content = document.createTextNode(title);
-                              h1.className = "title is-4 ml-2 mr-2";
-                              h1.appendChild(content);
+                              let h1 = createH1("title is-4 ml-2 mr-2",title);
                               appendElementToADiv(divMediaContent,h1);
                //----------------card-content is inside card content----------------
-               let divCardContent1 = document.createElement('div');
-               divCardContent1.className = "card-content";
+               let divCardContent1 = createDiv("card-content");
                divCardContent.appendChild(divCardContent1);
                      //----------------Controll of the news----------------
                      if(text!=undefined){
                         //----------------Delete >p> from the news----------------
-                        let textCardContent1=text.replaceAll(": ",": <br /> ");
-                        let textCardContent2=textCardContent1.replaceAll("*","");
-                        let textCardContent=textCardContent2.replaceAll("<p>","<br /> ");
+                        let textCardContent=optimizeText(text);
                         if(text.length>=200){
                            //---------------- If mobile make all the news length maximum 250 char----------------
                            let textContentShort=textCardContent.slice(0,197);
@@ -66,28 +78,24 @@ export function createDiv(className){
                            //---------------- Visibile only for Mobile and tablet----------------
                            let pForTextMobile=createPForCardMobileAndTablet(textContentShort);
                            //---------------- Visibile only for Desktop----------------
-                           let pForTextDesktop=createPForCardDesktop(textCardContent);                     
-                           divCardContent1.appendChild(pForTextMobile);
-                           divCardContent1.appendChild(pForTextDesktop);
+                           let pForTextDesktop=createPForCardDesktop(textCardContent);   
+                           appendElementToADiv(divCardContent1,pForTextMobile);                  
+                           appendElementToADiv(divCardContent1,pForTextDesktop); 
                            modalForCardWithMuchText(textCardContent,title,divCardContent1,indexElement);
                            createModalButton(divCardContent1,indexElement);
                         }else{
                            let pForText=createP(textCardContent);
                            pForText.style.color="#111111";
-                           divCardContent1.appendChild(pForText);
+                           createModalButton(divCardContent1,pForText);
                         }
 
                      }
 
-                     if(urlOfTheNewsElemente!=undefined){
-                        //----------------content is inside card content1----------------
-                        let urlOfTheNews = document.createElement('a');
-                        urlOfTheNews.className = "content has-text-info";
-                        urlOfTheNews.target = "_blank";
-                        urlOfTheNews.href=urlOfTheNewsElemente;
-                        urlOfTheNews.textContent='Click here to read the news!';
-                        divCardContent1.appendChild(urlOfTheNews);
+                     if(href!=undefined){
+                        createUrl("content has-text-info",href,'Click here to read the news!',divCardContent1);
+                        
                      }
+
                      //----------------time is inside card content1----------------
                      let pTime = document.createElement('div');
                      pTime.className = "content has-text-grey";
@@ -95,8 +103,16 @@ export function createDiv(className){
                      divCardContent1.appendChild(pTime);
  }
  
+function optimizeText(text){
+   let textCardContent1=text.replaceAll(". ",". <br />");
+   let textCardContent2=textCardContent1.replaceAll("*","");
+   let textCardContent3=textCardContent2.replaceAll("?","? <br />");
+   let textCardContent4=textCardContent3.replaceAll("!","! <br />");
+   let textCardContent=textCardContent4.replaceAll("<p>","<br /> ");
+   return textCardContent;
+}
 
- export function createP(content){
+function createP(content){
     //----------------1. Create <p> element---------------- 
     let p = document.createElement('p');
     //----------------2. Center the P element---------------- 
@@ -104,6 +120,15 @@ export function createDiv(className){
     //----------------3. Set content and use only this characters---------------- 
     p.innerHTML = content;
     return p;
+ }
+
+ function createUrl(className,href,textContent,divElement){
+   let urlOfTheNews = document.createElement('a');
+   urlOfTheNews.className = className;
+   urlOfTheNews.target = "_blank";
+   urlOfTheNews.href=href;
+   urlOfTheNews.textContent=textContent;
+   appendElementToADiv(divElement,urlOfTheNews);
  }
 
 function createPForCardMobileAndTablet(content){
@@ -128,7 +153,7 @@ function createPForCardMobileAndTablet(content){
    return p;
 }
 
- export function createH1(className, content){
+function createH1(className, content){
     //----------------1. Create <H1> element---------------- 
     let h1 = document.createElement('H1');
     let cont = document.createTextNode(content);
@@ -151,7 +176,7 @@ export function createButton(innerOfButton){
 
  }
 
- export function appendElementToADiv(div,element){
+function appendElementToADiv(div,element){
     div.appendChild(element);
  }
 
@@ -162,43 +187,37 @@ export function createButton(innerOfButton){
    p.className="mr-5 ml-5";
 
    //----------------Create the modal element----------------
-   var modal = document.createElement("div");
-   modal.classList.add("modal");
-   modal.className='modal is-hidden-desktop is-rounded ml-5 mr-5';
+   let modal = createDiv('modal is-hidden-desktop is-rounded ml-5 mr-5');
    modal.setAttribute("id", `Modal-${indexElement}`);
 
    //----------------Create the modal background element----------------
-   var modalBackground = document.createElement("div");
-   modalBackground.classList.add("modal-background");
+   let modalBackground = createDiv("modal-background");
    modal.appendChild(modalBackground);
 
    //----------------Create the modal card element----------------
-   var modalCard = document.createElement("div");
-   modalCard.classList.add("modal-card");
+   let modalCard = createDiv("modal-card");
    modal.appendChild(modalCard);
 
    //----------------Create the modal card head element----------------
-   var modalCardHead = document.createElement("header");
-   modalCardHead.classList.add("modal-card-head");
+   let modalCardHead = document.createElement("header");
+   modalCardHead.className="modal-card-head";
    modalCard.appendChild(modalCardHead);
 
    //----------------Create the modal card title element----------------
-   var modalCardTitle = document.createElement("p");
+   let modalCardTitle = document.createElement("p");
    modalCardTitle.classList.add("modal-card-title");
-   modalCardTitle.className='title is-4 ml-2 mr-2';
+   modalCardTitle.className="title is-4 ml-2 mr-2";
    modalCardTitle.innerText = title;
    modalCardHead.appendChild(modalCardTitle);
 
    //----------------Create the close modal button element----------------
-   var closeModalButton = document.createElement("button");
+   let closeModalButton = document.createElement("button");
    closeModalButton.classList.add("delete");
    closeModalButton.setAttribute("id",`close-modal-${indexElement}`);
-   modalCardHead.appendChild(closeModalButton);
+   appendElementToADiv(modalCardHead,closeModalButton);
 
    //----------------Create the modal card body element----------------
-   var modalCardBody = document.createElement("section");
-   modalCardBody.classList.add("modal-card-body");
-   modalCardBody.className='is-flex';
+   let modalCardBody = createSection('modal-card-body is-flex');
    modalCardBody.style.overflowY = "auto";
    modalCardBody.style.maxHeight="80%";
    modalCardBody.style.overflowX = "hidden";
@@ -206,8 +225,7 @@ export function createButton(innerOfButton){
    modalCard.appendChild(modalCardBody);
 
    //----------------Create the modal card footer element----------------
-   var modalCardFooter = document.createElement("footer");
-   modalCardFooter.classList.add("modal-card-foot");
+   let modalCardFooter=createFooter("modal-card-foot");
    modalCard.appendChild(modalCardFooter);
    
    //----------------Append modal to the body----------------
@@ -215,10 +233,21 @@ export function createButton(innerOfButton){
 
    }
    
+   function createSection(className){
+      let modalCardBody = document.createElement("section");
+      modalCardBody.className=className;
+      return modalCardBody;
+   }
+
+   function createFooter(className){
+      let modalCardFooter = document.createElement("footer");
+      modalCardFooter.className=className;
+      return modalCardFooter;
+   }
+
    function createModalButton(divCardContent1,indexElement) {
       //----------------Create the show modal button element----------------
-      var showModalButton = document.createElement("button");
-      showModalButton.classList.add("button", "is-primary");
+      let showModalButton = document.createElement("button");
       showModalButton.className="button my-buttonShow is-primary is-hidden-desktop";
       showModalButton.setAttribute("id", "show-modal");
       showModalButton.innerText = "Show Modal";

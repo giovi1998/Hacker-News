@@ -62,8 +62,8 @@ document.body.append(myButtonsLoad);
 myButtonsLoad.addEventListener("click", ()=>loadNews(),false);
     
 async function loadNews(){
-    let start=datas.length;
-    let end =datas.length+10;
+    let start=_.get(datas,"length");
+    let end =start+10;
     if(start==500){
         alert("There aren't new News you can read, you have exceeded the maximum number of News, please reload the page");
     }else{

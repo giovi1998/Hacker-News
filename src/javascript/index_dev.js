@@ -30,6 +30,7 @@ for(let i=0;i<10;i++){
     createCardWithoutImage(i,divMain,datas[i].url,datas[i].title,datas[i].time);
     */
    //----------------Lodash Way----------------
+   console.log(datas[i]);
     let url=_.get(datas[i],"url");
     let title=_.get(datas[i],"title");
     let time=_.get(datas[i],"time");
@@ -44,8 +45,8 @@ document.body.append(myButtonsLoad);
 myButtonsLoad.addEventListener("click", ()=>loadNews(),false);
     
 async function loadNews(){
-    let start=datas.length;
-    let end =datas.length+10;
+    let start=_.get(datas,"length");
+    let end =start+10;
     if(start==500){
         alert("There aren't new News you can read, you have exceeded the maximum number of News, please reload the page");
     }else{
@@ -54,6 +55,7 @@ async function loadNews(){
 
     await getTopNews(end);
     for(let i=start;i<end;i++){
+        console.log(datas[i]);
         let url=_.get(datas[i],"url");
         let title=_.get(datas[i],"title");
         let time=_.get(datas[i],"time");

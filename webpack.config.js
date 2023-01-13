@@ -1,32 +1,31 @@
-// Plugin che ci permette di utilizzare un template nel codice sorgente e ottimizzarlo per la versione che andrà online
+/*---------------- Plugin that allows us to use a template in the source 
+code and optimize it for the version that will go online----------------*/
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-// Libreria che ci permette di utilizzare le Environment Variables durante lo sviluppo locale
+//----------------Library that allows us to use Environment Variables during local development----------------
 const Dotenv = require("dotenv-webpack");
-// Modulo di NodeJS che dà la possibilità di interagire con file e cartelle locali
+//----------------NodeJS module that gives the possibility to interact with local files and folders----------------
 const path = require("path");
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const stylesHandler = MiniCssExtractPlugin.loader;
 
-// Per permettere a WebPack di utilizzare gli argomenti il modulo deve essere una funzione (normalmente è un oggetto)
+//----------------To allow WebPack to use arguments the module must be a function (usually it is an object)----------------
 module.exports = (env, argv) => {
-  // FONDAMENTALE! Definiamo il file da utilizzare in base all'ambiente
-  // Se WebPack vede che siamo in sviluppo andrà ad utilizzare './src/index_dev.js'
-  // Se invece saremo in produzione utilizzerà './src/index.js'
+  //----------------BASIC! We define the file to use based on the environment----------------
   const entryPath =
     argv.mode === "development" ? "./src/javascript/index_dev.js" : "./src/javascript/index.js";
   return {
     entry: {
-      // Qui specifichiamo il file di ENTRATA, vedi commento sopra
       main: path.resolve(__dirname, entryPath),
     },
     output: {
-      // Una volta creato un pacchetto WebPack metterà i file risultanti nella cartella build
+      //----------------Once a package is created WebPack will put the resulting files in the build folder----------------
       filename: "[name].bundle.js",
       path: path.resolve(__dirname, "build"),
     },
-    // Configurazione di un plugin, necessario per sveltire il processo di sviluppo vedi asterischi nello snippet successivo **
+    /*----------------Configuring a plugin, needed to speed up the development process see asterisks in the 
+    next snippet **----------------*/
     devServer: {
       static: "./build",
       open: true,
@@ -48,14 +47,13 @@ module.exports = (env, argv) => {
       ],
   },
     plugins: [
-      // Plugin che prende un template e lo personalizza, completandolo con scripts ed eventuali stili
+      //----------------Plugin that takes a template and customizes it, completing it with scripts and any styles----------------
       new HtmlWebpackPlugin({
         title: "Hacker News",
         template: path.resolve(__dirname, "./src/index.html"),
         favicon: "./src/images//Favicon.jpg",
         
       }),
-      // Qui dotenv-webpack viene inizializzato
       new Dotenv(),
       new MiniCssExtractPlugin({
 

@@ -86,7 +86,7 @@ export function createDiv(className){
                         }else{
                            let pForText=createP(textCardContent);
                            pForText.style.color="#111111";
-                           createModalButton(divCardContent1,pForText);
+                           appendElementToADiv(divCardContent1,pForText);
                         }
 
                      }
@@ -97,10 +97,13 @@ export function createDiv(className){
                      }
 
                      //----------------time is inside card content1----------------
-                     let pTime = document.createElement('div');
-                     pTime.className = "content has-text-grey";
-                     pTime.textContent ='Published '+timeOfNews;
-                     divCardContent1.appendChild(pTime);
+                     if(timeOfNews!=undefined){
+                        let pTime = document.createElement('div');
+                        pTime.className = "content has-text-grey";
+                        pTime.textContent ='Published '+timeOfNews;
+                        divCardContent1.appendChild(pTime);
+                     }
+                     
  }
  
 function optimizeText(text){
@@ -214,7 +217,7 @@ function appendElementToADiv(div,element){
    let closeModalButton = document.createElement("button");
    closeModalButton.classList.add("delete");
    closeModalButton.setAttribute("id",`close-modal-${indexElement}`);
-   appendElementToADiv(modalCardHead,closeModalButton);
+   modalCardHead.appendChild(closeModalButton);
 
    //----------------Create the modal card body element----------------
    let modalCardBody = createSection('modal-card-body is-flex');

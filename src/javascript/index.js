@@ -19,7 +19,10 @@ async function callLambdaFunction() {
     // console.log(data.value1);
     // console.log(data.value2);
     // console.log(data.value3);
-    const arrayOfEnv= [data.value1,data.value2,data.value3];
+    let env1=_.get(data,"value1");
+    let env2=_.get(data,"value2");
+    let env3=_.get(data,"value3");
+    const arrayOfEnv= [env1,env2,env3];
     return arrayOfEnv;
   }
   

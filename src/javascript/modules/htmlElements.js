@@ -5,13 +5,13 @@ let currentX
 export function createTitleAndParagraphOfThePage(){
    //----------------creeate H1---------------- 
    let content = "HACKER NEWS LETTER";
-   let className = "title has-text-white";
+   let className = "title has-text-white ml-1 mr-1";
    let h1 = createH1(className,content);
    //----------------append to the H1 to body element----------------
    document.body.append(h1);
 
    //----------------Create Div of the Header with Paragraph and title----------------
-   let divHeader = createDiv("mr-1 ml-1");
+   let divHeader = createDiv("mr-3 ml-3");
    let content1 = "Latest news from Hacker News. Below you can see a series of news with the title, link and the time it was published. For more information, see the "; 
    let p = createP(content1);
    //----------------append p element to div element----------------

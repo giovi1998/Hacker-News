@@ -73,7 +73,6 @@ async function loadNews(){
 
         for(let i=start;i<end;i++){
             if(_.get(datas[i],"dead")!=true || datas[i]!=null || _.get(datas[i],"text") !=undefined){
-            console.log(datas[i]);
             let url=_.get(datas[i],"url");
             let title=_.get(datas[i],"title");
             let time=_.get(datas[i],"time");

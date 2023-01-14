@@ -69,7 +69,7 @@ async function loadNews(){
     }else{
     //----------------Set loading class when it's loading new News----------------
     myButtonsLoad.className='button buttonLoad is-warning is-loading mt-2 mb-2';
-    await getTopNews(end);
+    await getTopNews(end,enVariables[1],enVariables[2]);
 
         for(let i=start;i<end;i++){
             if(_.get(datas[i],"dead")!=true || datas[i]!=null || _.get(datas[i],"text") !=undefined){

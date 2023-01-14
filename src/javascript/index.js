@@ -33,15 +33,13 @@ const enVariables= await callLambdaFunction();
 await getTopNewsId(enVariables[0]);
 createTitleAndParagraphOfThePage();
 
-//----------------Container with all cards----------------
-let divMain = createDiv("container");
-
 //----------------Create and append Spinner----------------
 let divSpinner = createSpinner("lds-dual-ring is-flex-direction-column mt-1");
 
 //----------------Get info----------------
 await getTopNews(10,enVariables[1],enVariables[2]);
-//----------------Create Card image----------------
+
+//----------------Create Cards image----------------
 for(let i=0;i<10;i++){
     //----------------Hide Element Spinner----------------
     divSpinner.className='is-hidden';
@@ -49,18 +47,19 @@ for(let i=0;i<10;i++){
     createCardWithoutImage(i,divMain,datas[i].url,datas[i].title,datas[i].time);
     */
    //----------------Lodash Way----------------
-    let url=_.get(datas[i],"url");
-    let title=_.get(datas[i],"title");
-    let time=_.get(datas[i],"time");
-    let text=_.get(datas[i],"text");
-    createCardWithoutImage(i,divMain,url,title,time,text);
+   console.log(datas[i]);
+   if(_.get(datas[i],"dead")!=true){
+        let url=_.get(datas[i],"url");
+        let title=_.get(datas[i],"title");
+        let time=_.get(datas[i],"time");
+        let text=_.get(datas[i],"text");
+        createCardWithoutImage(i,url,title,time,text);
+   }
 }
 //----------------Create Load More News----------------
 let myButtonsLoad = createButton('Load More News');
-styleButton(myButtonsLoad,'button buttonMinus is-info is-light mt-2 mb-6');
+styleButton(myButtonsLoad,'button buttonLoad is-info is-light mt-2');
 document.body.append(myButtonsLoad);
-
-
     
 myButtonsLoad.addEventListener("click", ()=>loadNews(),false);
     
@@ -70,18 +69,29 @@ async function loadNews(){
     if(start==500){
         alert("There aren't new News you can read, you have exceeded the maximum number of News, please reload the page");
     }else{
-            //----------------Set loading class when it's loading new News----------------
-    myButtonsLoad.className='button is-warning is-loading mt-2 mb-6';
+    //----------------Set loading class when it's loading new News----------------
+    myButtonsLoad.className='button buttonLoad is-warning is-loading mt-2 mb-2';
+    await getTopNews(end);
+    if(_.get(datas[i],"dead")!=true){
+        for(let i=start;i<end;i++){
+            console.log(datas[i]);
+            let url=_.get(datas[i],"url");
+            let title=_.get(datas[i],"title");
+            let time=_.get(datas[i],"time");
+            let text=_.get(datas[i],"text");
+            // get the existing element with the class "button buttonLoad"
+            let existingElements = document.getElementsByClassName("button buttonLoad");
+            // assuming that you have only one element with that class name
+            let existingElement = existingElements[0];
 
-    await getTopNews(end,enVariables[1],enVariables[2]);
-    for(let i=start;i<end;i++){
-        let url=_.get(datas[i],"url");
-        let title=_.get(datas[i],"title");
-        let time=_.get(datas[i],"time");
-        let text=_.get(datas[i],"text");
-        createCardWithoutImage(i,divMain,url,title,time,text);
-    }
-    styleButton(myButtonsLoad,'button buttonMinus is-info is-light mt-2 mb-6');
-    
+            // create a new element
+            let newElement = createCardWithoutImage(i,url,title,time,text);
+
+            // insert the new element before the existing element
+            existingElement.parentNode.insertBefore(newElement, existingElement);
+
+        }
+        styleButton(myButtonsLoad,'button buttonLoad is-info is-centered is-light mt-2 mb-2');
+        }
     }
 }

@@ -1,6 +1,10 @@
 //Prova utilizzo bulma framework CSS
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
 
+// * {
+//   outline: 1px solid red;
+// }
+
 html{
     background: linear-gradient(#484444, #9fada1); //css function
     height: 100%;
@@ -8,6 +12,7 @@ html{
 
 body{
     display: flex;
+    max-width: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -18,15 +23,22 @@ body{
     overflow: hidden;
   }
 }
-
-.container {
-    display: block;
-
-    &.card {
-        max-width: 1000px !important;
-    }
+.card .card-content{
+  word-wrap: break-word;
+  text-overflow: ellipsis;
 }
 
+.delete {
+    position: absolute;
+    top: 1rem;
+    right: 0.75rem;
+}
+
+
+.my-buttonShow{
+  display: block;
+  margin: auto;
+}
 h1{
   word-wrap: break-word;
   text-overflow: ellipsis;
@@ -71,6 +83,7 @@ p{
 
   .modal-card-body{
     max-height: 80%;
+    max-width: 100%;
     overflow-x:auto;
   }
 

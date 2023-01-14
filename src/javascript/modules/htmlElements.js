@@ -5,13 +5,13 @@ let currentX
 export function createTitleAndParagraphOfThePage(){
    //----------------creeate H1---------------- 
    let content = "HACKER NEWS LETTER";
-   let className = "title is-3 has-text-white mt-5 mr-5 ml-5";
-   let h1= createH1(className,content);
+   let className = "title has-text-white";
+   let h1 = createH1(className,content);
    //----------------append to the H1 to body element----------------
    document.body.append(h1);
 
    //----------------Create Div of the Header with Paragraph and title----------------
-   let divHeader = createDiv("mr-5 ml-5");
+   let divHeader = createDiv("mr-1 ml-1");
    let content1 = "Latest news from Hacker News. Below you can see a series of news with the title, link and the time it was published. For more information, see the "; 
    let p = createP(content1);
    //----------------append p element to div element----------------
@@ -45,12 +45,12 @@ export function createDiv(className){
    return div;
 }
 
- export function createCardWithoutImage(indexElement,divMain,href,title,timeOfNews,text){
+ export function createCardWithoutImage(indexElement,href,title,timeOfNews,text){
    //----------------card----------------
-   let divCard = createDiv(`card card-${indexElement+1}`+" is-full mt-2 ml-6 mr-6");
-   divMain.appendChild(divCard);
+   let divCard = createDiv(`card card-${indexElement+1}`+" mt-2 ml-6 mr-6");
+   document.body.append(divCard);
          //----------------card-content----------------
-         let divCardContent = createDiv("card-content is-fullwidth");
+         let divCardContent = createDiv("card-content");
          divCard.appendChild(divCardContent);
                //----------------Media is-align----------------
                let divMedia = createDiv("media is-align-items-center");
@@ -103,8 +103,8 @@ export function createDiv(className){
                         pTime.textContent ='Published '+timeOfNews;
                         divCardContent1.appendChild(pTime);
                      }
-                     
- }
+                     return divCard;               
+}
  
 function optimizeText(text){
    let textCardContent1=text.replaceAll(". ",". <br />");
@@ -251,7 +251,7 @@ function appendElementToADiv(div,element){
    function createModalButton(divCardContent1,indexElement) {
       //----------------Create the show modal button element----------------
       let showModalButton = document.createElement("button");
-      showModalButton.className="button my-buttonShow is-primary is-hidden-desktop";
+      showModalButton.className="button my-buttonShow is-primary is-hidden-desktop mt-1 mb-1";
       showModalButton.setAttribute("id", "show-modal");
       showModalButton.innerText = "Show the news text";
 

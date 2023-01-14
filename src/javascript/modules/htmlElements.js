@@ -47,14 +47,11 @@ export function createDiv(className){
 
  export function createCardWithoutImage(indexElement,href,title,timeOfNews,text){
    //----------------card----------------
-   let divCard = createDiv(`card card-${indexElement+1}`+" mt-2 ml-6 mr-6");
+   let divCard = createDiv(`card card-${indexElement+1}`+" is-flex is-flex-direction-column mt-2");
    document.body.append(divCard);
-         //----------------card-content----------------
-         let divCardContent = createDiv("card-content");
-         divCard.appendChild(divCardContent);
                //----------------Media is-align----------------
                let divMedia = createDiv("media is-align-items-center");
-               divCardContent.appendChild(divMedia);
+               divCard.appendChild(divMedia);
                      //----------------Media left is inside Media is-align----------------
                      let divMediaLeft = createDiv(`media-left mediaLeft-${indexElement+1}`);
                      divMedia.appendChild(divMediaLeft);
@@ -62,11 +59,11 @@ export function createDiv(className){
                      let divMediaContent =createDiv("media-content");
                      divMedia.appendChild(divMediaContent);
                               //----------------H1 is inside Media-Content----------------
-                              let h1 = createH1("title is-4 ml-2 mr-2",title);
+                              let h1 = createH1("title is-4 mt-2 ml-2 mr-2",title);
                               appendElementToADiv(divMediaContent,h1);
                //----------------card-content is inside card content----------------
-               let divCardContent1 = createDiv("card-content");
-               divCardContent.appendChild(divCardContent1);
+               let divCardContent1 = createDiv("card-content is-center");
+               divCard.appendChild(divCardContent1);
                      //----------------Controll of the news----------------
                      if(text!=undefined){
                         //----------------Delete >p> from the news----------------

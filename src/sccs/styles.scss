@@ -1,9 +1,9 @@
 //Prova utilizzo bulma framework CSS
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
 
-// * {
-//   outline: 1px solid red;
-// }
+* {
+  outline: 1px solid red;
+}
 
 html{
     background: linear-gradient(#484444, #9fada1); //css function
@@ -23,9 +23,23 @@ body{
     overflow: hidden;
   }
 }
-.card .card-content{
-  word-wrap: break-word;
-  text-overflow: ellipsis;
+
+.card {
+    width: 80%;
+    max-width: 1088px;
+    & .card-content{
+      word-wrap: break-word;
+      text-overflow: ellipsis;
+      max-width: 100%;
+  }
+}
+
+
+
+@media only screen and (min-width: 1024px) {
+  body.modal-open{
+    overflow: hidden;
+  }
 }
 
 .delete {

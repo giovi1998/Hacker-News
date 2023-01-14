@@ -46,7 +46,7 @@ for(let i=0;i<10;i++){
     createCardWithoutImage(i,divMain,datas[i].url,datas[i].title,datas[i].time);
     */
    //----------------Lodash Way----------------
-   if(_.get(datas[i],"dead")!=true || datas[i]!=null){
+   if(_.get(datas[i],"dead")!=true || datas[i]!=null || _.get(datas[i],"text") !=undefined){
         let url=_.get(datas[i],"url");
         let title=_.get(datas[i],"title");
         let time=_.get(datas[i],"time");
@@ -72,7 +72,7 @@ async function loadNews(){
         await getTopNews(end);
     
             for(let i=start;i<end;i++){
-                if(_.get(datas[i],"dead")!=true || datas[i]!=null){
+                if(_.get(datas[i],"dead")!=true || datas[i]!=null || _.get(datas[i],"text") !=undefined){
                 let url=_.get(datas[i],"url");
                 let title=_.get(datas[i],"title");
                 let time=_.get(datas[i],"time");

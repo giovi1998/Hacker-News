@@ -51,8 +51,9 @@ async function loadNews(){
     //----------------Set loading class when it's loading new News----------------
     myButtonsLoad.className='button buttonLoad is-warning is-loading mt-2 mb-2';
     await getTopNews(end);
-    if(_.get(datas[i],"dead")!=true){
+
         for(let i=start;i<end;i++){
+            if(_.get(datas[i],"dead")!=true){
             console.log(datas[i]);
             let url=_.get(datas[i],"url");
             let title=_.get(datas[i],"title");
@@ -62,15 +63,12 @@ async function loadNews(){
             let existingElements = document.getElementsByClassName("button buttonLoad");
             // assuming that you have only one element with that class name
             let existingElement = existingElements[0];
-
             // create a new element
             let newElement = createCardWithoutImage(i,url,title,time,text);
-
             // insert the new element before the existing element
             existingElement.parentNode.insertBefore(newElement, existingElement);
-
+            }
         }
         styleButton(myButtonsLoad,'button buttonLoad is-info is-centered is-light mt-2 mb-2');
-        }
     }
 }

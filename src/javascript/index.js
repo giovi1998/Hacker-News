@@ -4,7 +4,6 @@ import {getTopNewsId,getTopNews,datas} from "./modules/httpAPI.js";
 
 //----------------import Funtions from CreateElements.js----------------
 import {createCardWithoutImage} from "./modules/htmlElements.js";
-import {createDiv} from "./modules/htmlElements.js";
 import {createTitleAndParagraphOfThePage} from "./modules/htmlElements.js";
 import {createButton} from "./modules/htmlElements.js";
 import {styleButton} from "./modules/htmlElements.js";

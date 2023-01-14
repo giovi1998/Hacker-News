@@ -21,9 +21,11 @@ async function getNewFromID(itemNumber){
     .then(function (response) {
         //----------------handle success----------------
         let data=_.get(response,"data");
-        let timeConvert = timeConverter(_.get(data,"time"));
         dataOfElementInCache=data;
-        dataOfElementInCache.time=timeConvert;
+        if(_.get(data,"time")!=undefined){
+          let timeConvert = timeConverter(_.get(data,"time"));
+          dataOfElementInCache.time=timeConvert;
+        }
       })
       .catch(function (error) {
         //----------------handle error----------------

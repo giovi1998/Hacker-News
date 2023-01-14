@@ -27,6 +27,10 @@ body{
     }
 }
 
+h1{
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+}
 
 p{
     color:white;

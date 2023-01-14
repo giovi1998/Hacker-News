@@ -46,7 +46,6 @@ for(let i=0;i<10;i++){
     createCardWithoutImage(i,divMain,datas[i].url,datas[i].title,datas[i].time);
     */
    //----------------Lodash Way----------------
-   console.log(datas[i]);
    if(_.get(datas[i],"dead")!=true){
         let url=_.get(datas[i],"url");
         let title=_.get(datas[i],"title");

@@ -18,6 +18,7 @@ src="src\images\desktopV2.png"
 <img 
 src="src\images\mobileV1.png"
 />
+<br>
 <img 
 src="src\images\mobileV2.png"
 />

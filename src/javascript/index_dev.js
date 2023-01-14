@@ -27,13 +27,13 @@ for(let i=0;i<10;i++){
     */
    //----------------Lodash Way----------------
    console.log(datas[i]);
-   if(_.get(datas[i],"dead")!=true){
+   if(_.get(datas[i],"dead")!=true || datas[i]!=null){
         let url=_.get(datas[i],"url");
         let title=_.get(datas[i],"title");
         let time=_.get(datas[i],"time");
         let text=_.get(datas[i],"text");
         createCardWithoutImage(i,url,title,time,text);
-   }
+    }
 }
 //----------------Create Load More News----------------
 let myButtonsLoad = createButton('Load More News');
@@ -53,7 +53,7 @@ async function loadNews(){
     await getTopNews(end);
 
         for(let i=start;i<end;i++){
-            if(_.get(datas[i],"dead")!=true){
+            if(_.get(datas[i],"dead")!=true || datas[i]!=null){
             console.log(datas[i]);
             let url=_.get(datas[i],"url");
             let title=_.get(datas[i],"title");
